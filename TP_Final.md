@@ -1,18 +1,11 @@
 # TP Final Certificación Profesional Python
 
-## Resumen
+## Informe de Diseño
 
 Se pide implementar un programa que permita leer datos de una API de finanzas, guardarlos en una base de datos y graficarlos.
 
-## Entrega
-
-Fecha límite 21 de diciembre.
-
-El trabajo se entrega en grupos de hasta 5 personas y se piden lo siguientes entregables:
-
  - Informe de funcionalidad y diseño
- - Repositorio de github
-
+ - Repositorio de github - Está bien con el mio o hay que crear uno grupal?
 
 ## Detalles de implementación
 
@@ -66,9 +59,6 @@ Ejemplo:
 >>> Ingrese el ticker a graficar:
 AAL
 ```
-
-## Condición de aprobación
-El programa debe cumplir con toda la funcionalidad dentro de detalles de implementación. Para obtener una nota superior a 7 deben implementarse alguna funcionalidad extra, sea las propuestas o propuestas por el grupo.
 
 ## Extras
 
