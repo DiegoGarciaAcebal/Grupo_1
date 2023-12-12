@@ -1,11 +1,22 @@
 # TP Final Certificación Profesional Python
 
-## Informe de Diseño
+## Resumen
 
-Se pide implementar un programa que permita leer datos de una API de finanzas, guardarlos en una base de datos y graficarlos.
+Se solicitó implementar un programa que permita leer datos de una API de finanzas, guardarlos en una base de datos y graficarlos.
+
+A continuación se presenta el Informe de Diseño.
+
+
+![Francis Galton](C:/Users/Diego García Acebal/Desktop/Diego_Dorso.jpg)
+## Entrega
+
+Fecha límite 21 de diciembre.
+
+El trabajo se entrega en grupos de hasta 5 personas y se piden lo siguientes entregables:
 
  - Informe de funcionalidad y diseño
- - Repositorio de github - Está bien con el mio o hay que crear uno grupal?
+ - Repositorio de github
+
 
 ## Detalles de implementación
 
@@ -59,6 +70,9 @@ Ejemplo:
 >>> Ingrese el ticker a graficar:
 AAL
 ```
+
+## Condición de aprobación
+El programa debe cumplir con toda la funcionalidad dentro de detalles de implementación. Para obtener una nota superior a 7 deben implementarse alguna funcionalidad extra, sea las propuestas o propuestas por el grupo.
 
 ## Extras
 
