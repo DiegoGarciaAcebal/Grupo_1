@@ -6,26 +6,16 @@ Se solicitó implementar un programa que permita leer datos de una API de finanz
 
 A continuación se presenta el Informe de Diseño.
 
-
-![Francis Galton](C:/Users/Diego García Acebal/Desktop/Diego_Dorso.jpg)
-## Entrega
-
-Fecha límite 21 de diciembre.
-
-El trabajo se entrega en grupos de hasta 5 personas y se piden lo siguientes entregables:
-
- - Informe de funcionalidad y diseño
- - Repositorio de github
-
-
 ## Detalles de implementación
 
-### Menú principal
-
-El programa debe presentar un menú principal donde puedan elegirse las siguientes dos opciones:
+Dado que se solicitó un programa que presentara un Menú principal con las siguientes dos opciones:
 
  1. Actualización de datos
  2. Visualización de datos
+
+Se decidió utilizar STREAMLIT como interfaz para que el usuario pueda utilizar el programa de manera más amigable y no dependa de la terminal.
+
+Desde el punto de vista de la 
 
 ### Actualización de datos
 
