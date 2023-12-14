@@ -17,7 +17,7 @@ Bajo está opción el programa debe permitir dos visualizaciones de datos:
 
  a) Resumen: Debe imprimir un resumen de los datos guardados en la base de datos.
  
- AAPL - 2022/01/01 <-> 2022/07/01
+    AAPL - 2022/01/01 <-> 2022/07/01
 
  b) Gráfico del Ticker: debe permitir graficar los datos guardados para un ticker específico.
 
