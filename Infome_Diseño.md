@@ -4,14 +4,14 @@ Se solicitó implementar un programa que permita leer datos de una API de finanz
 
 El programa debía presentar un Menú Principal con las siguientes dos opciones:
 
- 1) Actualización de Datos
- 2) Visualización de Datos
+ 1. Actualización de Datos
+ 2. Visualización de Datos
 
-## 1) Actualización de Datos
+## 1. Actualización de Datos
 
 Al seleccionar está opción en el Menú Principal el programa debía solicitar al usuario el valor de un ticker, una fecha de inicio y una fecha de fin para luego pedir los valores a la API (https://polygon.io/docs/stocks/getting-started) y guardar estos datos en una base de datos SQL.
 
-## 2) Visualización de Datos
+## 2. Visualización de Datos
 
 Bajo está opción el programa debe permitir dos visualizaciones de datos:
 
