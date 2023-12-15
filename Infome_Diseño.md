@@ -33,7 +33,7 @@ Dado que se solicitó un programa que presentara un Menú Principal con dos opci
 
 INSERTAR IMAGEN
 
-en dos archivos .py. El primero denominado TP_factualizar.py que realizar la consulta a la base de datos y el segundo denominado TP_fconsultar.py que permite visualizar el resumen o la información del Ticker...
+En dos archivos .py. El primero denominado TP_factualizar.py que realizar la consulta a la base de datos y el segundo denominado TP_fconsultar.py que permite visualizar el resumen o la información del Ticker...
 
 TP_factualizar.py:
 
