@@ -8,12 +8,12 @@ import subprocess
 #Certificación Profesional en Python del ITBA - Grupo_1 (Alonso Roberto, Anconetani Alejandra, Aragona Micaela, García Acebal Diego y Tomás Rodriguez
 #Entrega 21-12-2023
 
-st.set_page_config(page_title = 'Reporte de Stocks', #Nombre de la pagina, sale arriba cuando se carga streamlit
+st.set_page_config(page_title = 'Consulta de Stocks', #Nombre de la pagina, sale arriba cuando se carga streamlit
                    page_icon = 'moneybag:', # https://www.webfx.com/tools/emoji-cheat-sheet/
                    layout="wide")
 
 
-st.title(':clipboard: Reporte de Stocks') #Titulo del Dash
+st.title(':clipboard: Consulta de Stocks') #Titulo del Dash
 st.subheader('ITBA TP - Grupo 1 - Certificación Python')
 st.markdown('##') #Para separar el titulo de los KPIs, se inserta un paragrafo usando un campo de markdown
 
@@ -55,7 +55,7 @@ if optionActualizar == True:
         call_TP_actualizar(str(selected_dateD), str(selected_dateH), input_string)
         print( optionActualizar)
         
-st.sidebar.header("Opciones a filtrar:") #sidebar lo que nos va a hacer es crear en la parte izquierda un cuadro para agregar los filtros que queremos tener
+st.sidebar.header("Consulta - Filtros:") #sidebar lo que nos va a hacer es crear en la parte izquierda un cuadro para agregar los filtros que queremos tener
 sticker = st.sidebar.multiselect(
     "Seleccione el Ticker",
     options = df['ticker'].unique(),
