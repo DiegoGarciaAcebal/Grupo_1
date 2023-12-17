@@ -138,3 +138,81 @@ Un paso adicional para poder graficar los datos en función del tiempo es hacer 
     table = pd.pivot_table(df2_seleccion, values='close', index=['date'],
                            columns=['ticker'], aggfunc="max")
 
+Por último antes de pasar a la generación de los gráficos se definen 2 variables que totalizan el Volumen Total y la Cantidad de Registros a fin de poder mostrarlas en el headear del dashboard:
+
+    total_operaciones = int(df_seleccion['volume'].sum())
+
+    total_registros = int(df_seleccion['date'].count())
+
+    left_column, right_column = st.columns(2)
+
+    with left_column:
+        st.subheader("Volumen total:")
+        st.subheader(f"US $ {total_operaciones:,}")
+
+    with right_column:
+        st.subheader('Cantidad Registros:')
+        st.subheader(f" {total_registros}")
+   
+    st.markdown("---")
+
+#Muestra la Grilla Resumen
+
+    st.dataframe(df_seleccion)
+
+#Trabajo los querys de agrupaciones para los graficos
+#Grafico de Volumen de operaciones por Ticket
+
+    volumen_por_ticker = (df_seleccion.groupby(by=['ticker']).sum()[['volume']].sort_values(by='volume'))
+
+#Guardar el gráfico de barras en la siguiente variable
+
+    fig_volumen_tickers = px.bar(
+        volumen_por_ticker,
+        x = 'volume',
+        y=volumen_por_ticker.index, #se pone el index porque esta como index esa columna dentro del df nuevo que creamos que esta agrupado
+        orientation= "h", #horizontal bar chart
+        title = "<b>Volumen por Ticker</b>", #con las b lo que hago es ponerlo en bold
+        color_discrete_sequence = ["#1199bb"] * len(volumen_por_ticker),
+        template='plotly_white',
+    )
+
+    fig_volumen_tickers.update_layout(
+        plot_bgcolor = "rgba(0,0,0,0)",
+        xaxis=(dict(showgrid = False))
+    )
+
+#Grafico de Variación de Volúmen de Operaciones por Año mes 
+    
+    valores_por_fecha = (
+        df_seleccion.groupby(by=['AnioMes']).sum()[['volume']].sort_values(by='volume')
+    )
+
+#Crear la gráfica de barras para los volumenes por Año y Mes
+    
+    fig_valores_por_fecha = px.bar(
+        valores_por_fecha,
+        x=valores_por_fecha.index,  
+        y='volume',
+        title = '<b>Volumen por Período</b>',
+        color_discrete_sequence = ["#F5B932"]*len(valores_por_fecha),
+        template = 'plotly_white',
+    )
+
+fig_valores_por_fecha.update_layout(
+    #xaxis=dict(tickmode='linear'), # se asegura que todos los ejes de X se muestren
+    plot_bgcolor='rgba(0,0,0,0)',
+    yaxis=(dict(showgrid=False)),
+   
+)    
+
+## AGREGO DEBAJO DE LA TABLA -- > Chart de lineas
+
+    st.markdown(" **Variación Diaria - Valor al Cierre (p/Ticker)**  ")
+    st.line_chart(table)
+
+## AGREGO DEBAJO DOS GRAFICAS AGRUPADAS UNA POR FECHA Y OTRA POR TICKER - UNA AL LADO DE LA OTRA
+
+    left_column, right_column = st.columns(2)
+    left_column.plotly_chart(fig_valores_por_fecha, use_container_width = True) #esta va al lado izquierdo
+    right_column.plotly_chart(fig_volumen_tickers, use_container_width = True)
