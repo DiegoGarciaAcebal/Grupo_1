@@ -5,5 +5,7 @@ sqlite3==ver version
 subproccess==ver version
 openpyxl==3.0.10
 
+se pone python 3.11.4?
+
 
 
