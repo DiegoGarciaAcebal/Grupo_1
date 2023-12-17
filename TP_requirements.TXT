@@ -1,4 +1,9 @@
-openpyxl==3.0.10
-plotly==5.11.0
 pandas==1.5.2
+plotly==5.11.0
 streamlit==1.15.2
+sqlite3==ver version
+subproccess==ver version
+openpyxl==3.0.10
+
+
+
