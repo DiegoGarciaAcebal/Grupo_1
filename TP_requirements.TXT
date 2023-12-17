@@ -4,7 +4,11 @@ streamlit==1.15.2
 sqlite3==ver version
 subproccess==ver version
 openpyxl==3.0.10
-
+requests==ver version
+json==ver version
+datetime==ver version
+time==ver version
+sys==ver version
 se pone python 3.11.4?
 
 
