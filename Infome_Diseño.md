@@ -138,7 +138,7 @@ Un paso adicional para poder graficar los datos en función del tiempo es hacer 
     table = pd.pivot_table(df2_seleccion, values='close', index=['date'],
                            columns=['ticker'], aggfunc="max")
 
-Por último antes de pasar a la generación de los gráficos se definen 2 variables que totalizan el Volumen Total y la Cantidad de Registros a fin de poder mostrarlas en el headear del dashboard:
+Antes de pasar a la generación de los gráficos se definen 2 variables que totalizan el Volumen Total y la Cantidad de Registros a fin de poder mostrarlas en el headear del dashboard,
 
     total_operaciones = int(df_seleccion['volume'].sum())
 
@@ -156,22 +156,28 @@ Por último antes de pasar a la generación de los gráficos se definen 2 variab
    
     st.markdown("---")
 
-#Muestra la Grilla Resumen
+y se muestra la tabla con el resumen de la información presente en la base de dato:
 
     st.dataframe(df_seleccion)
 
-#Trabajo los querys de agrupaciones para los graficos
-#Grafico de Volumen de operaciones por Ticket
+Por último se definen mostrar 3 gráficos:
+
+Grafico de Volumen (de Operaciones) por Ticker y Grafico de Volúmen por Período (Mes) estos 2 en formato gráficos de barra mediante la librería PLOTLY; y un Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREMLIT.
+
+Para generar ambos gráficos de barra primero hay que tener 2 variables que con al información necesaria que se generan mediante la agrupación, suma y ordenamientos de los DataFrames.
 
     volumen_por_ticker = (df_seleccion.groupby(by=['ticker']).sum()[['volume']].sort_values(by='volume'))
+    valores_por_fecha = (df_seleccion.groupby(by=['AnioMes']).sum()[['volume']].sort_values(by='volume'))
 
-#Guardar el gráfico de barras en la siguiente variable
+Luego con PLOTLY se asigna el tipo de gráfico (.bar - de barra en este caso) y se definen los ejes, la orientación, el título y el color. Todo esto se guarda en una variable que luego será llama por STREMLIT para mostrar el gráfico en el dashboard.
+
+Para el Grafico de Volumen (de Operaciones) por Ticker:
 
     fig_volumen_tickers = px.bar(
         volumen_por_ticker,
         x = 'volume',
-        y=volumen_por_ticker.index, #se pone el index porque esta como index esa columna dentro del df nuevo que creamos que esta agrupado
-        orientation= "h", #horizontal bar chart
+        y=volumen_por_ticker.index,
+        orientation= "h",
         title = "<b>Volumen por Ticker</b>", #con las b lo que hago es ponerlo en bold
         color_discrete_sequence = ["#1199bb"] * len(volumen_por_ticker),
         template='plotly_white',
@@ -182,14 +188,8 @@ Por último antes de pasar a la generación de los gráficos se definen 2 variab
         xaxis=(dict(showgrid = False))
     )
 
-#Grafico de Variación de Volúmen de Operaciones por Año mes 
-    
-    valores_por_fecha = (
-        df_seleccion.groupby(by=['AnioMes']).sum()[['volume']].sort_values(by='volume')
-    )
+Para el Grafico de Volúmen por Período (Mes):
 
-#Crear la gráfica de barras para los volumenes por Año y Mes
-    
     fig_valores_por_fecha = px.bar(
         valores_por_fecha,
         x=valores_por_fecha.index,  
@@ -199,20 +199,21 @@ Por último antes de pasar a la generación de los gráficos se definen 2 variab
         template = 'plotly_white',
     )
 
-fig_valores_por_fecha.update_layout(
-    #xaxis=dict(tickmode='linear'), # se asegura que todos los ejes de X se muestren
-    plot_bgcolor='rgba(0,0,0,0)',
-    yaxis=(dict(showgrid=False)),
-   
-)    
+    fig_valores_por_fecha.update_layout(
+        #xaxis=dict(tickmode='linear'), # se asegura que todos los ejes de X se muestren
+        plot_bgcolor='rgba(0,0,0,0)',
+        yaxis=(dict(showgrid=False)),
+    )
 
-## AGREGO DEBAJO DE LA TABLA -- > Chart de lineas
+Por último se define el layout dentro del dashboard, se agrega con un markdown abajo de la tabla resumen el Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREMLIT,
 
     st.markdown(" **Variación Diaria - Valor al Cierre (p/Ticker)**  ")
     st.line_chart(table)
 
-## AGREGO DEBAJO DOS GRAFICAS AGRUPADAS UNA POR FECHA Y OTRA POR TICKER - UNA AL LADO DE LA OTRA
+y debajo los dos gráficos de barra generados con PLOTLY uno al lado del otro.
 
     left_column, right_column = st.columns(2)
-    left_column.plotly_chart(fig_valores_por_fecha, use_container_width = True) #esta va al lado izquierdo
+    left_column.plotly_chart(fig_valores_por_fecha, use_container_width = True)
     right_column.plotly_chart(fig_volumen_tickers, use_container_width = True)
+
+Fin del código.
