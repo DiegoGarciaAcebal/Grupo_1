@@ -44,17 +44,18 @@ A continuación se describe el funcionamiento y la lógica del programa:
 
 ### TP_fconsultar_actualizar.py:
 
-La primera parte del código (luego de importar la librerías) define la configuración de la pagina mediante el .set_page_config de la librería Streamlit.
+La primera parte del código (luego de importar la librerías) define la configuración de la pagina mediante el .set_page_config de la librería Streamlit:
 
-   st.set_page_config(page_title = 'Consulta de Stocks',
-                   page_icon = 'moneybag:',
-                   layout="wide")
+    st.set_page_config(page_title = 'Consulta de Stocks',
+                       page_icon = 'moneybag:',
+                       layout="wide")
 
-Posteriormente se definen el Titulo y subtitulo del DashBoard
+Posteriormente se definen el Titulo y subtitulo del DashBoard:
 
-   st.title(':clipboard: Consulta de Stocks')
-   st.subheader('ITBA TP - Grupo 1 - Certificación Python')
-   st.markdown('##')
+    st.title(':clipboard: Consulta de Stocks')
+    st.subheader('ITBA TP - Grupo 1 - Certificación Python')
+    st.markdown('##')
+
 
 1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
 2) Crea la variable db de tipo str y le asigna el valor base_datos_stock.db.
