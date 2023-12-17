@@ -79,15 +79,22 @@ Los 3 datos a ingresar de acuerdo a lo solicitado en los RF son: Fechas Desde, F
     selected_dateH = st.sidebar.date_input("Seleccione Fecha Hasta")
     input_string = st.sidebar.text_input("Ingreso Ticker", "")
 
+Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros de búsqueda, se define una función que recibe esos mismos tres parámetros y mediante la libreria SUBPROCESS ejectua el segundo archivo .py denominado TP_factualizar_p.py que es el que realiza la consulta a la API y actualiza la base de datos.
 
+    def call_TP_actualizar(parameter1, parameter2, parameter3):
+        try:
+            result = subprocess.run(["python", "TP_factualizar_p.py", parameter1, parameter2, parameter3], capture_output=True, text=True, check=True)
+            print(result.stdout)
+        except subprocess.CalledProcessError as e:
+            print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
+A continuación se describe el funcionamiento del archivo TP_fconsultar_actualizar.py que como mencionamos anteriormente es el que "corre" y ejecuta la consulta cada vez que el usuario "hace click" en el sidebar Opciones para actualizar.
 
 ### TP_fconsultar_actualizar.py:
 
 1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
 2) Crea la variable db de tipo str y le asigna el valor base_datos_stock.db.
 3) Conecta o crea la base de datos.
-
 4) Le asigna a la variable api_key la clave de la API Polygon.
 5) Mediante las variables ticker, fecha_inicio y fecha_fin se le solicita al usuario que ingrese los datos.
 6) Mediante un while se verifica que la fecha de inicio (fecha_inicio) sea anterior a la fecha de finalizacion (fecha_fin) y que el formato sea el correcto.
