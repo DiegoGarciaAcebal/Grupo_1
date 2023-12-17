@@ -1,3 +1,4 @@
+python==3.11.4
 pandas==1.5.2
 plotly==5.11.0
 streamlit==1.15.2
@@ -9,7 +10,3 @@ json==ver version
 datetime==ver version
 time==ver version
 sys==ver version
-se pone python 3.11.4?
-
-
-
