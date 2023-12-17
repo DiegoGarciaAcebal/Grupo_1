@@ -88,9 +88,7 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
         except subprocess.CalledProcessError as e:
             print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
-A continuación se describe el funcionamiento del archivo TP_fconsultar_actualizar.py que como mencionamos anteriormente es el que "corre" y ejecuta la consulta cada vez que el usuario "hace click" en el sidebar Opciones para actualizar.
-
-### TP_fconsultar_actualizar.py:
+A continuación se describe el funcionamiento del archivo TP_fconsultar_actualizar.py que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
 1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
 2) Crea la variable db de tipo str y le asigna el valor base_datos_stock.db.
@@ -102,4 +100,41 @@ A continuación se describe el funcionamiento del archivo TP_fconsultar_actualiz
 8) mediante el paquete request se realiza la consulta con el método .get y la respuesta se pasa a formato json.
 9) Se define una función para que luego de conectarse se inserten los datos.
 10) Por último mediante un if se verifica si la solicitud fue exitosa aplicando el método .status_code sobre el response.
+
+Volviendo al programa principal (TP_fconsultar_actualizar.py)
+
+Debemos agregar a la sidebar un boton para que el usuario "haga click" una vez introducidos los 3 parametos de búsqueda y llame a la función call_TP_actualizar, la cual como explicamos anteriormente recibe esos 3 parámetros y subejecuta el arhcivo TP_factualizar_p.py.
+
+    optionActualizar = st.sidebar.button("Hacer Click para actualizar datos" )
+    if optionActualizar == True:
+        print("hiciste click en Actualizar fconsultar_actualizar")
+        print (selected_dateD, selected_dateH, input_string)
+        call_TP_actualizar(str(selected_dateD), str(selected_dateH), input_string)
+        print(optionActualizar)
+
+A continuación a fin de podes realizar filtros en los gráficos se deben generar en el sidebar dichos "botones". Los filtros permiten elegir el Ticker y la fecha (YYYY-MM): 
+
+    st.sidebar.header("Consulta - Filtros:")
+    
+    sticker = st.sidebar.multiselect(
+        "Seleccione el Ticker",
+        options = df['ticker'].unique(),
+        default = df['ticker'].unique()
+    )
+
+    saniomes = st.sidebar.multiselect(
+        "Seleccione Fecha - YYYY-MM",
+        options = df['AnioMes'].unique(),
+        default = df['AnioMes'].unique()
+    )
+
+Una vez definidos los filtros, se deben conectar los "botones" selectores a la base de datos. Para esto mediante SQLITE3 se realizan 2 .query a los 2 DataFrame previamente generados (df y df2) donde el primer ticker es la columna y el segundo es el selector.
+
+    df_seleccion = df.query("ticker == @sticker  & AnioMes == @saniomes" )
+    df2_seleccion =  df2.query("ticker == @sticker  & AnioMes == @saniomes" )
+
+Un paso adicional para poder graficar los datos en función del tiempo es hacer con PANDAS hacer un .pivot_table (similar al transpose de excel) sobre el segundo DataFrame:
+
+    table = pd.pivot_table(df2_seleccion, values='close', index=['date'],
+                           columns=['ticker'], aggfunc="max")
 
