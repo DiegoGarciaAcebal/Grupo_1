@@ -9,7 +9,7 @@ El programa debía presentar un Menú Principal con las siguientes dos opciones:
 
 ## 1. Actualización de Datos
 
-Al seleccionar está opción en el Menú Principal el programa debía solicitar al usuario el valor de un ticker, una fecha de inicio y una fecha de fin para luego pedir los valores a la API (https://polygon.io/docs/stocks/getting-started) y guardar estos datos en una base de datos SQL.
+Al seleccionar está opción en el Menú Principal el programa debía solicitar al usuario el valor de un ticker, una fecha de inicio y una fecha de fin para luego pedir los valores a la API **(https://polygon.io/docs/stocks/getting-started)** y guardar estos datos en una base de datos SQL.
 
 ## 2. Visualización de Datos
 
@@ -88,7 +88,7 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
         except subprocess.CalledProcessError as e:
             print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
-A continuación se describe el funcionamiento del archivo TP_fconsultar_actualizar.py que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
+A continuación se describe de manera resumida el funcionamiento del archivo **TP_fconsultar_actualizar.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
 1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
 2) Crea la variable db de tipo str y le asigna el valor base_datos_stock.db.
