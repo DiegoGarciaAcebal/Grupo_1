@@ -109,31 +109,31 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
 
 A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
-1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
+_1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time._
 
-2) Recibe los **3 parámetros definidos** en la función **call_TP_actualizar** que son los parámetros definidos en los RF.
+_2) Recibe los **3 parámetros definidos** en la función **call_TP_actualizar** que son los parámetros definidos en los RF._
 
-3) Crea la variable **db** de tipo str y le asigna el valor **base_datos_stock.db**.
+_3) Crea la variable **db** de tipo str y le asigna el valor **base_datos_stock.db**._
 
-4) Conecta o crea la base de datos si no existe.
+_4) Conecta o crea la base de datos si no existe._
 
-5) Si no existe crea la tabla con los siguientes datos: **ticker, date, open, high, low, close, y volume**
+_5) Si no existe crea la tabla con los siguientes datos: **ticker, date, open, high, low, close, y volume**_
 
-6) Le asigna a la variable **api_key** la clave de la API Polygon.
+_6) Le asigna a la variable **api_key** la clave de la API Polygon._
 
-7) Con un **while** se verifica que la **fecha de inicio (fecha_inicio)** sea anterior a la **fecha de finalizacion (fecha_fin)** y que el formato sea el correcto.
+_7) Con un **while** se verifica que la **fecha de inicio (fecha_inicio)** sea anterior a la **fecha de finalizacion (fecha_fin)** y que el formato sea el correcto._
 
-9) Posteriormente con un **f string** se construye la url de la API y se le asgina a la variable **url**.
+_9) Posteriormente con un **f string** se construye la url de la API y se le asgina a la variable **url**._
 
-10) Mediante el paquete **request** se realiza la consulta con el método **get()** y dado que la respuesta es en formato JSON, se utiliza el método **json()** para convertir la misma a un objeto de Python. Luego los datos convertidos se almacenan en la variable **data** y en la variable **a**, esta última en formato de lista.
+_10) Mediante el paquete **request** se realiza la consulta con el método **get()** y dado que la respuesta es en formato JSON, se utiliza el método **json()** para convertir la misma a un objeto de Python. Luego los datos convertidos se almacenan en la variable **data** y en la variable **a**, esta última en formato de lista._
 
-11) Luego se define la funcion **insertVaribleIntoTable** que recibe los 7 valores definidos en el punto (5) y la misma verifica si el valor existe en la tabla, y si no existe lo inserta.
+_11) Luego se define la funcion **insertVaribleIntoTable** que recibe los 7 valores definidos en el punto (5) y la misma verifica si el valor existe en la tabla, y si no existe lo inserta._
 
-12) Por último mediante un **if** se verifica si la solicitud fue exitosa aplicando el un **status_code** sobre el response.
+_12) Por último mediante un **if** se verifica si la solicitud fue exitosa aplicando el un **status_code** sobre el response._
 
-13) De ser exitosa (código == 200) se verifica con otro **if** si el **queryCount** de la variable **data**. Si es == 0 indica que no se informaron datos para la selección. Caso contrario recorre la variable **a** con un **for** y llama a la función **insertVaribleIntoTable** para insertar lo valores.
+_13) De ser exitosa (código == 200) se verifica con otro **if** si el **queryCount** de la variable **data**. Si es == 0 indica que no se informaron datos para la selección. Caso contrario recorre la variable **a** con un **for** y llama a la función **insertVaribleIntoTable** para insertar lo valores._
 
-14) De no ser exitosa informa mediante un **print()** que no se pudieron obtener datos de la API.
+_14) De no ser exitosa informa mediante un **print()** que no se pudieron obtener datos de la API._
 
 Volviendo al programa principal (TP_fconsultar_actualizar.py)
 
