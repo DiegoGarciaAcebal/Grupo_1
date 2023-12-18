@@ -37,27 +37,16 @@ Un archivo principal denominado TP_fconsultar_actualizar.py que define el marco 
 
 Las liberías utilizadas son:
 
+python = 3.1.11
+
 pandas==1.5.2
 
 plotly==5.11.0
 
 streamlit==1.15.2
 
-sqlite3==ver version
-
-subproccess==ver version
-
 openpyxl==3.0.10
 
-requests==ver version
-
-json==ver version
-
-datetime==ver version
-
-time==ver version
-
-sys==ver version
 
 A continuación se describe el funcionamiento y la lógica del programa: 
 
