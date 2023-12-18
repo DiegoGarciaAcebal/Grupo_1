@@ -37,8 +37,27 @@ Un archivo principal denominado TP_fconsultar_actualizar.py que define el marco 
 
 Las liberías utilizadas son:
 
+pandas==1.5.2
 
+plotly==5.11.0
 
+streamlit==1.15.2
+
+sqlite3==ver version
+
+subproccess==ver version
+
+openpyxl==3.0.10
+
+requests==ver version
+
+json==ver version
+
+datetime==ver version
+
+time==ver version
+
+sys==ver version
 
 A continuación se describe el funcionamiento y la lógica del programa: 
 
@@ -88,18 +107,33 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
         except subprocess.CalledProcessError as e:
             print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
-A continuación se describe de manera resumida el funcionamiento del archivo **TP_fconsultar_actualizar.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
+A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
 1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time.
-2) Crea la variable db de tipo str y le asigna el valor base_datos_stock.db.
-3) Conecta o crea la base de datos.
-4) Le asigna a la variable api_key la clave de la API Polygon.
-5) Mediante las variables ticker, fecha_inicio y fecha_fin se le solicita al usuario que ingrese los datos.
-6) Mediante un while se verifica que la fecha de inicio (fecha_inicio) sea anterior a la fecha de finalizacion (fecha_fin) y que el formato sea el correcto.
-7) Posteriormente con un f string se construye la url de la API y se le asgina a la variable url.
-8) mediante el paquete request se realiza la consulta con el método .get y la respuesta se pasa a formato json.
-9) Se define una función para que luego de conectarse se inserten los datos.
-10) Por último mediante un if se verifica si la solicitud fue exitosa aplicando el método .status_code sobre el response.
+
+2) Recibe los **3 parámetros definidos** en la función **call_TP_actualizar** que son los parámetros definidos en los RF.
+
+3) Crea la variable **db** de tipo str y le asigna el valor **base_datos_stock.db**.
+
+4) Conecta o crea la base de datos si no existe.
+
+5) Si no existe crea la tabla con los siguientes datos: **ticker, date, open, high, low, close, y volume**
+
+6) Le asigna a la variable **api_key** la clave de la API Polygon.
+
+7) Con un **while** se verifica que la **fecha de inicio (fecha_inicio)** sea anterior a la **fecha de finalizacion (fecha_fin)** y que el formato sea el correcto.
+
+9) Posteriormente con un **f string** se construye la url de la API y se le asgina a la variable **url**.
+
+10) Mediante el paquete **request** se realiza la consulta con el método **get()** y dado que la respuesta es en formato JSON, se utiliza el método **json()** para convertir la misma a un objeto de Python. Luego los datos convertidos se almacenan en la variable **data** y en la variable **a**, esta última en formato de lista.
+
+11) Luego se define la funcion **insertVaribleIntoTable** que recibe los 7 valores definidos en el punto (5) y la misma verifica si el valor existe en la tabla, y si no existe lo inserta.
+
+12) Por último mediante un **if** se verifica si la solicitud fue exitosa aplicando el un **status_code** sobre el response.
+
+13) De ser exitosa (código == 200) se verifica con otro **if** si el **queryCount** de la variable **data**. Si es == 0 indica que no se informaron datos para la selección. Caso contrario recorre la variable **a** con un **for** y llama a la función **insertVaribleIntoTable** para insertar lo valores.
+
+14) De no ser exitosa informa mediante un **print()** que no se pudieron obtener datos de la API.
 
 Volviendo al programa principal (TP_fconsultar_actualizar.py)
 
