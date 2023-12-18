@@ -96,7 +96,7 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
         except subprocess.CalledProcessError as e:
             print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
-A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
+A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar_p.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
 _1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time._
 
