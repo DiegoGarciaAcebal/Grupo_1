@@ -1,1 +1,0 @@
-Streamlit run TP_fconsultar_actualizar.py
