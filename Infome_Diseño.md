@@ -185,7 +185,7 @@ y se muestra la tabla con el resumen de la información presente en la base de d
 
 Por último se definen mostrar 3 gráficos:
 
-Grafico de Volumen (de Operaciones) por Ticker y Grafico de Volúmen por Período (Mes) estos 2 en formato gráficos de barra mediante la librería PLOTLY; y un Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREMLIT.
+Grafico de Volumen (de Operaciones) por Ticker y Grafico de Volúmen por Período (Mes) estos 2 en formato gráficos de barra mediante la librería PLOTLY; y un Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREAMLIT.
 
 Para generar ambos gráficos de barra primero hay que tener 2 variables que con al información necesaria que se generan mediante la agrupación, suma y ordenamientos de los DataFrames.
 
@@ -228,7 +228,7 @@ Para el Grafico de Volúmen por Período (Mes):
         yaxis=(dict(showgrid=False)),
     )
 
-Por último se define el layout dentro del dashboard, se agrega con un markdown abajo de la tabla resumen el Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREMLIT,
+Por último se define el layout dentro del dashboard, se agrega con un markdown abajo de la tabla resumen el Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREAMLIT,
 
     st.markdown(" **Variación Diaria - Valor al Cierre (p/Ticker)**  ")
     st.line_chart(table)
