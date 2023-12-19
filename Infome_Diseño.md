@@ -9,7 +9,7 @@ El programa debía presentar un **Menú Principal** con las siguientes dos opcio
 
 ## 1. Actualización de Datos
 
-Al seleccionar está opción en el Menú Principal el programa debía solicitar al usuario el valor de un ticker, una fecha de inicio y una fecha de fin para luego pedir los valores a la API **(https://polygon.io/docs/stocks/getting-started)** y guardar estos datos en una base de datos SQL.
+Al seleccionar está opción en el Menú Principal, el programa debía solicitar al usuario el valor de un ticker, una fecha de inicio y una fecha de fin para luego pedir los valores a la API **(https://polygon.io/docs/stocks/getting-started)** y guardar estos datos en una base de datos SQL.
 
 ## 2. Visualización de Datos
 
@@ -25,13 +25,13 @@ Bajo está opción el programa debe permitir dos visualizaciones de datos:
 
 ## Interfaz:
 
-A fin de presentar el menú principal y los diferentes gráficos de manera más amigable, se recurrió a la libería STREAMLIT dado que la misma genera una interfaz gráfica intuitiva y facil de usar, evitando que el usuario tenga que ejecutar los comandos desde la terminal.
+A fin de presentar el menú principal y los diferentes gráficos de manera más amigable, se recurrió a la libería **STREAMLIT** dado que la misma genera una interfaz gráfica intuitiva y facil de usar, evitando que el usuario tenga que ejecutar los comandos desde la terminal.
 
 ## Modularización:
 
 Dado que se solicitó un programa que presentara un Menú Principal con dos opciones (Actualizar y Visualizar Datos) se definió modularizar el programa de la siguiente manera:
 
-Un archivo principal denominado TP_fconsultar_actualizar.py que define el marco en Streamlit y que cuando es solicitado ejecuta la consulta para actualizar a la base de datos mediante la ejecución del archivo TP_factualizar_p.py.
+Un archivo principal denominado **TP_fconsultar_actualizar.py** que define el marco en **STREAMLIT** y que cuando es solicitado ejecuta la consulta para actualizar a la base de datos mediante la ejecución del archivo **TP_factualizar_p.py**.
 
 ## Liberías:
 
@@ -47,12 +47,11 @@ streamlit==1.15.2
 
 openpyxl==3.0.10
 
-
 A continuación se describe el funcionamiento y la lógica del programa: 
 
 ### TP_fconsultar_actualizar.py:
 
-La primera parte del código (luego de importar la librerías) define la configuración de la pagina mediante el .set_page_config de la librería STREAMLIT:
+La primera parte del código (luego de importar la librerías) define la configuración de la pagina mediante el **.set_page_config** de la librería **STREAMLIT**:
 
     st.set_page_config(page_title = 'Consulta de Stocks',
                        page_icon = 'moneybag:',
@@ -64,12 +63,12 @@ Posteriormente se definen el Título y Subtítulo que apareceran en el DashBoard
     st.subheader('ITBA TP - Grupo 1 - Certificación Python')
     st.markdown('##')
 
-El primer paso es crear la conección a la base de datos mediante la libería SQLITE3,
+El primer paso es crear la conección a la base de datos mediante la libería **SQLITE3**,
 
     con = sqlite3.connect('base_datos_stock.db')
     cursor = con.cursor()
 
-para luego mediante la librería PANDAS generar dos DataFrame con los datos de cada consultas:
+para luego mediante la librería **PANDAS** generar dos DataFrame con los datos de cada consultas:
 
     df = pd.read_sql("SELECT *  ,  substr(date , 1,7) as AnioMes  FROM base_datos_stock order by date desc , ticker asc  ", con)
     df2 = pd.read_sql ("SELECT    substr(date , 1,7) as AnioMes , date     , ticker  ,  close from  base_datos_stock group by substr(date , 1,7),date  , ticker order by date ", con)
@@ -80,14 +79,14 @@ El segundo DataFrame (df2) es un query a la base de datos donde se solicitan los
 
 A continuación se definen una "Barra Lateral" (sidebar) donde el usuario podrá ingresar los 3 datos necesarios para realizar la consulta a la API y de esta manera actualizar la base de datos.
 
-Los 3 datos a ingresar de acuerdo a lo solicitado en los RF son: Fechas Desde, Fecha Hasta y el código de la acción (Ticker).
+Los 3 datos a ingresar de acuerdo a lo solicitado en los RF son: **Fechas Desde**, **Fecha Hasta** y el **código de la acción (Ticker)**.
 
     st.sidebar.header("Opciones para actualizar")      
     selected_dateD = st.sidebar.date_input("Seleccione Fecha Desde")
     selected_dateH = st.sidebar.date_input("Seleccione Fecha Hasta")
     input_string = st.sidebar.text_input("Ingreso Ticker", "")
 
-Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros de búsqueda, se define una función que recibe esos mismos tres parámetros y mediante la libreria SUBPROCESS ejectua el segundo archivo .py denominado TP_factualizar_p.py que es el que realiza la consulta a la API y actualiza la base de datos.
+Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros de búsqueda, se define una función que recibe esos mismos tres parámetros y mediante la libreria **SUBPROCESS** ejectua el segundo archivo .py denominado **TP_factualizar_p.py** que es el que realiza la consulta a la API y actualiza la base de datos.
 
     def call_TP_actualizar(parameter1, parameter2, parameter3):
         try:
@@ -96,7 +95,7 @@ Una vez definido el sidebar donde el usuario podrá ingresar los 3 parámetros d
         except subprocess.CalledProcessError as e:
             print(f"Error calling TP_actualizar_p.py: {e.stderr}")
 
-A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar_p.py** que como mencionamos anteriormente es el que "corre" y ejecuta la consulta a la API cada vez que el usuario lo solicita.
+A continuación se describe de manera resumida el funcionamiento del archivo **TP_factualizar_p.py** que como mencionamos anteriormente es el que _"corre"_ y ejecuta la consulta a la API cada vez que el usuario lo solicita.
 
 _1) Importa las siguientes librerías: pandas, requests, json, sqlite3, datetime y time._
 
