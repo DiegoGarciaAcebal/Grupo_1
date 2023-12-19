@@ -2,7 +2,7 @@
 
 Se solicitó implementar un programa que permita leer datos de una API de finanzas, guardarlos en una base de datos y graficarlos.
 
-El programa debía presentar un Menú Principal con las siguientes dos opciones:
+El programa debía presentar un **Menú Principal** con las siguientes dos opciones:
 
  1. Actualización de Datos
  2. Visualización de Datos
