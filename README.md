@@ -9,12 +9,12 @@ Las corridas siguientes para probar o utilizar la aplicación debe ejecutar TP_e
 
 
 **RESUMEN TECNICO :**
-El proyecto cuenta con dos programas .py a saber :
-TP_fconsultar_actualizar.py (interface de usuario que permite Actualizar datos en una base de datos de Stocks ingresando parámetros de consulta y consultar los datos en dos modalidades grilla y gráficos aplicando filtros ) 
-TP_factualizar_p.py : es el programa que se encarga de recibir los parámetros para gestionar con la API la consulta de los datos, verificar si existen e incorporarlos en la base de datos.
+El proyecto cuenta con dos programas .py a saber :  
+TP_fconsultar_actualizar.py (interface de usuario que permite Actualizar datos en una base de datos de Stocks ingresando parámetros de consulta y consultar los datos en dos modalidades grilla y gráficos aplicando filtros )   
+TP_factualizar_p.py : es el programa que se encarga de recibir los parámetros para gestionar con la API la consulta de los datos, verificar si existen e incorporarlos en la base de datos.  
 
-**MANUAL FUNCIONAL :**
-Se deja instructivo de uso en el repositorio llamado Manual del Usuario - TP Python.pdf
+**MANUAL FUNCIONAL :**  
+Se deja instructivo de uso en el repositorio llamado Manual del Usuario - TP Python.pdf  
 
-**DISEÑO TECNICO :**
-Se deja documento .md llamado Informe_Diseño con las descripción de los componentes desarrollados que conforman este proyecto.- 
+**DISEÑO TECNICO :**  
+Se deja documento .md llamado Informe_Diseño con las descripción de los componentes desarrollados que conforman este proyecto.-   
