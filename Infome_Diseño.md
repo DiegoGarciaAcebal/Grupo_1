@@ -124,9 +124,9 @@ _13) De ser exitosa (código == 200) se verifica con otro **if** si el **queryCo
 
 _14) De no ser exitosa informa mediante un **print()** que no se pudieron obtener datos de la API._
 
-Volviendo al programa principal (TP_fconsultar_actualizar.py)
+Volviendo al programa principal **(TP_fconsultar_actualizar.py)**
 
-Debemos agregar a la sidebar un boton para que el usuario "haga click" una vez introducidos los 3 parametos de búsqueda y llame a la función call_TP_actualizar, la cual como explicamos anteriormente recibe esos 3 parámetros y subejecuta el arhcivo TP_factualizar_p.py.
+Debemos agregar a la sidebar un boton para que el usuario _"haga click"_ una vez introducidos los 3 parametos de búsqueda y llame a la función **call_TP_actualizar**, la cual como explicamos anteriormente recibe esos 3 parámetros y subejecuta el arhcivo **TP_factualizar_p.py**.
 
     optionActualizar = st.sidebar.button("Hacer Click para actualizar datos" )
     if optionActualizar == True:
@@ -135,7 +135,7 @@ Debemos agregar a la sidebar un boton para que el usuario "haga click" una vez i
         call_TP_actualizar(str(selected_dateD), str(selected_dateH), input_string)
         print(optionActualizar)
 
-A continuación a fin de podes realizar filtros en los gráficos se deben generar en el sidebar dichos "botones". Los filtros permiten elegir el Ticker y la fecha (YYYY-MM): 
+A continuación a fin de podes realizar filtros en los gráficos se deben generar en el sidebar dichos _"botones"_. Los filtros permiten elegir el **Ticker** y la **fecha (YYYY-MM)**: 
 
     st.sidebar.header("Consulta - Filtros:")
     
@@ -151,17 +151,17 @@ A continuación a fin de podes realizar filtros en los gráficos se deben genera
         default = df['AnioMes'].unique()
     )
 
-Una vez definidos los filtros, se deben conectar los "botones" selectores a la base de datos. Para esto mediante SQLITE3 se realizan 2 .query a los 2 DataFrame previamente generados (df y df2) donde el primer ticker es la columna y el segundo es el selector.
+Una vez definidos los filtros, se deben conectar los _"botones"_ selectores a la base de datos. Para esto mediante **SQLITE3** se realizan 2 **.query** a los 2 DataFrame previamente generados (df y df2) donde el primer ticker es la columna y el segundo es el selector.
 
     df_seleccion = df.query("ticker == @sticker  & AnioMes == @saniomes" )
     df2_seleccion =  df2.query("ticker == @sticker  & AnioMes == @saniomes" )
 
-Un paso adicional para poder graficar los datos en función del tiempo es hacer con PANDAS hacer un .pivot_table (similar al transpose de excel) sobre el segundo DataFrame:
+Un paso adicional para poder graficar los datos en función del tiempo es hacer con **PANDAS** hacer un **.pivot_table** (similar al transpose de excel) sobre el segundo DataFrame:
 
     table = pd.pivot_table(df2_seleccion, values='close', index=['date'],
                            columns=['ticker'], aggfunc="max")
 
-Antes de pasar a la generación de los gráficos se definen 2 variables que totalizan el Volumen Total y la Cantidad de Registros a fin de poder mostrarlas en el headear del dashboard,
+Antes de pasar a la generación de los gráficos se definen 2 variables que totalizan el **Volumen Total** y la **Cantidad de Registros** a fin de poder mostrarlas en el headear del dashboard,
 
     total_operaciones = int(df_seleccion['volume'].sum())
 
@@ -185,23 +185,23 @@ y se muestra la tabla con el resumen de la información presente en la base de d
 
 Por último se definen mostrar 3 gráficos:
 
-Grafico de Volumen (de Operaciones) por Ticker y Grafico de Volúmen por Período (Mes) estos 2 en formato gráficos de barra mediante la librería PLOTLY; y un Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREAMLIT.
+**Grafico de Volumen (de Operaciones) por Ticker** y **Grafico de Volúmen por Período (Mes)** estos 2 en formato gráficos de barra mediante la librería **PLOTLY**; y un **Grafico de Valor de Cierre por Día** en formato de linea que se genera mediante **STREAMLIT**.
 
 Para generar ambos gráficos de barra primero hay que tener 2 variables que con al información necesaria que se generan mediante la agrupación, suma y ordenamientos de los DataFrames.
 
     volumen_por_ticker = (df_seleccion.groupby(by=['ticker']).sum()[['volume']].sort_values(by='volume'))
     valores_por_fecha = (df_seleccion.groupby(by=['AnioMes']).sum()[['volume']].sort_values(by='volume'))
 
-Luego con PLOTLY se asigna el tipo de gráfico (.bar - de barra en este caso) y se definen los ejes, la orientación, el título y el color. Todo esto se guarda en una variable que luego será llama por STREMLIT para mostrar el gráfico en el dashboard.
+Luego con **PLOTLY** se asigna el tipo de gráfico (.bar - de barra en este caso) y se definen los ejes, la orientación, el título y el color. Todo esto se guarda en una variable que luego será llamada por **STREAMLIT** para mostrar el gráfico en el dashboard.
 
-Para el Grafico de Volumen (de Operaciones) por Ticker:
+Para el **Grafico de Volumen (de Operaciones) por Ticker**:
 
     fig_volumen_tickers = px.bar(
         volumen_por_ticker,
         x = 'volume',
         y=volumen_por_ticker.index,
         orientation= "h",
-        title = "<b>Volumen por Ticker</b>", #con las b lo que hago es ponerlo en bold
+        title = "<b>Volumen por Ticker</b>",
         color_discrete_sequence = ["#1199bb"] * len(volumen_por_ticker),
         template='plotly_white',
     )
@@ -211,7 +211,7 @@ Para el Grafico de Volumen (de Operaciones) por Ticker:
         xaxis=(dict(showgrid = False))
     )
 
-Para el Grafico de Volúmen por Período (Mes):
+Para el **Grafico de Volúmen por Período (Mes)**:
 
     fig_valores_por_fecha = px.bar(
         valores_por_fecha,
@@ -223,17 +223,17 @@ Para el Grafico de Volúmen por Período (Mes):
     )
 
     fig_valores_por_fecha.update_layout(
-        #xaxis=dict(tickmode='linear'), # se asegura que todos los ejes de X se muestren
+        #xaxis=dict(tickmode='linear'),
         plot_bgcolor='rgba(0,0,0,0)',
         yaxis=(dict(showgrid=False)),
     )
 
-Por último se define el layout dentro del dashboard, se agrega con un markdown abajo de la tabla resumen el Grafico de Valor de Cierre por día en formato de linea que se genera mediante STREAMLIT,
+Por último se define el layout dentro del dashboard, se agrega con un markdown abajo de la tabla resumen el **Grafico de Valor de Cierre por Día** en formato de linea que se genera mediante **STREAMLIT**,
 
     st.markdown(" **Variación Diaria - Valor al Cierre (p/Ticker)**  ")
     st.line_chart(table)
 
-y debajo los dos gráficos de barra generados con PLOTLY uno al lado del otro.
+y debajo los dos gráficos de barra generados con **PLOTLY** uno al lado del otro.
 
     left_column, right_column = st.columns(2)
     left_column.plotly_chart(fig_valores_por_fecha, use_container_width = True)
