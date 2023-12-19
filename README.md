@@ -1,7 +1,7 @@
 # Grupo_1
 Certificación Profesional en Python del ITBA - Grupo_1 (Alonso Roberto, Anconetani Alejandra, Aragona Micaela, García Acebal Diego y Tomás Rodriguez)
 
-**El proyecto entregado contiene dos puntos bat a saber :** 
+**El proyecto entregado contiene dos puntos bat a saber :**   
 1- Archivo .bat TP_instalador.bat -- > el cual está configurado para ejecutar el pip install utilizando el archivo requirements.TXT que se encuentra en la plataforma con las versiones de Python y de las librerías utilizadas.  
 2- Archivo .bat TP_ejectuar_TP_fconsultar_actualizar -- > el cual está configurado para ejecutar el Streamlit run TP_fconsultar_actualizar.PY que es el programa principal del proyecto.  
 La primera vez de uso el usuario debe bajar el contenido de todo el repositorio en su sesión de trabajo y ejecutar el archivo TP_instalador.bat.    
